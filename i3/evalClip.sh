@@ -1,0 +1,1 @@
+eval `xclip -o`

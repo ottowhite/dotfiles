@@ -1,0 +1,196 @@
+set $mod Mod4
+
+# Initial config
+new_window 1pixel
+smart_borders on
+
+gaps inner 10
+gaps outer 0
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id compton -f
+
+exec_always --no-startup-id feh --bg-scale /home/otto/Pictures/wallpapers/northern_lights_blue.jpg
+exec_always --no-startup-id setxkbmap -option ctrl:swapcaps -option altwin:swap_alt_win
+exec_always --no-startup-id /home/otto/.config/polybar/reloadPolybar.sh
+exec_always --no-startup-id /home/otto/.config/i3/mapTouchInputToInternalDisplay.sh
+
+bindsym $mod+w layout toggle
+
+bindsym $mod+r mode "resize"
+bindsym $mod+g mode "gaps_resize"
+
+bindsym $mod+Return  exec --no-startup-id alacritty
+bindsym $mod+q       kill
+bindsym $mod+d       exec --no-startup-id dmenu_run -l 5
+bindsym $mod+e       exec --no-startup-id /home/otto/.config/i3/evalClip.sh
+bindsym $mod+b       exec --no-startup-id brave
+bindsym $mod+n       exec --no-startup-id notion-app-nativefier
+bindsym $mod+t       exec --no-startup-id thunderbird
+bindsym $mod+i       exec --no-startup-id idea
+bindsym $mod+x       exec --no-startup-id GDK_SCALE=2 xournalpp
+bindsym $mod+s       exec --no-startup-id spotify --force-device-scale-factor=2 # alacritty -e /home/otto/.config/i3/pickMusic.sh && exit
+bindsym $mod+a       exec anki
+bindsym $mod+c       exec --no-startup-id libreoffice ~/Documents/Journal.docx
+
+bindsym $mod+Shift+s      exec --no-startup-id maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
+bindsym $mod+Shift+b      exec alacritty -e sudo /home/otto/.config/i3/fixSound.sh && exit
+bindsym $mod+Shift+Ctrl+s exec --no-startup-id maim -s --format jpg ~/Pictures/screenshots/screenshot_`date '+%d-%m-%y_%H:%M:%S'`.jpg
+# bindsym $mod+m            exec --no-startup-id autorandr --change # No longer necessary
+# bindsym $mod+BackSpace    exec /home/otto/.config/i3/rotate.sh
+bindsym $mod+Shift+p      exec systemctl suspend ; exec betterlockscreen -l 
+# bindsym $mod+c            exec /home/otto/.config/i3/profileSwitcher.sh
+# bindsym $mod+Shift+i      exec /home/otto/.config/i3/activateTethering.sh
+
+bindsym XF86MonBrightnessUp   exec /home/otto/.config/i3/brightnessChanger.sh 0.1
+bindsym XF86MonBrightnessDown exec /home/otto/.config/i3/brightnessChanger.sh -0.1
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +5% 
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -5% 
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause ; exec --no-startup-id notify-send -t 1000 "Play/Pause toggled" ""
+bindsym XF86AudioNext exec --no-startup-id playerctl next       ; exec --no-startup-id notify-send -t 1000 "Next" ""
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous   ; exec --no-startup-id notify-send -t 1000 "Previous" ""
+
+font pango:Noto Mono for Powerline, Font Awesome 8
+# bar {
+#         position top
+#         font pango:Noto Mono for Powerline, Font Awesome 11
+#         status_command bumblebee-status \
+#             -m nic memory nvidiagpu cpu pasink pasource battery time \
+#             -p time.format="%d/%m/%y (%a) %H:%M:%S" \
+#                nvidiagpu.format='{temp}°C {mem_used}/{mem_total} MiB' \
+#                memory.format='{used} ({percent:05.02f}%)' \
+#                nic.format='{ssid}' \
+#                .format='' \
+#             -t iceberg-powerline
+#         colors {
+# 
+# 		            # Gruvbox
+#                 #                  border  bg      text
+#                 # focused_workspace  #705F51 #705F51 #EBDBB2
+#                 # active_workspace   #1C2121 #222233 #EBDBB2
+#                 # inactive_workspace #1C2121 #1C2121 #EBDBB2
+#                 # background #1C2121 
+# 
+# 		            # Mild blue-ish theme
+#                 focused_workspace  #555577 #555577 #FFFFFF
+#                 active_workspace   #333344 #222233 #FFFFFF
+#                 inactive_workspace #333344 #333344 #FFFFFF
+#                 background #333344
+#         }
+# 
+# }
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+# bindsym $mod+space focus mode_toggle # change focus between tiling / floating windows
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+v split toggle
+bindsym $mod+f fullscreen toggle
+
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Assigns odd numbers to my connected monitor and even to laptop monitor
+workspace $ws1 output HDMI-0 eDP-1-1
+workspace $ws2 output HDMI-0 eDP-1-1
+workspace $ws3 output HDMI-0 eDP-1-1
+workspace $ws4 output HDMI-0 eDP-1-1
+workspace $ws5 output HDMI-0 eDP-1-1
+workspace $ws6 output eDP-1-1 
+workspace $ws7 output eDP-1-1
+workspace $ws8 output eDP-1-1
+workspace $ws9 output eDP-1-1
+workspace $ws10 output eDP-1-1
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+bindsym $mod+Shift+c reload # reload the configuration file
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+mode "gaps_resize" {
+    bindsym Up         gaps outer current minus 5
+    bindsym Down       gaps outer current plus 5
+    bindsym Shift+Up   gaps outer all minus 5
+    bindsym Shift+Down gaps outer all plus 5
+
+    bindsym Left        gaps inner current plus 5
+    bindsym Right       gaps inner current minus 5
+    bindsym Shift+Left  gaps inner all plus 5
+    bindsym Shift+Right gaps inner all minus 5
+
+    bindsym 0       gaps outer current set 0 ; gaps inner current set 0
+    bindsym Shift+0 gaps outer all set 0     ; gaps inner all set 0 
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+

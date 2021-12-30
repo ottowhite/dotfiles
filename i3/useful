@@ -1,0 +1,23 @@
+# my script for backing up everything from CTT video:
+# https://www.youtube.com/watch?v=OEfboN-Nb2s
+sudo rsync -aAX --info=progress2 --delete --dry-run --exclude "/dev/*" --exclude "/proc/*" --exclude "/sys/*" --exclude "/tmp/*" --exclude "/run/*" --exclude "/mnt/*" --exclude "/media/*" --exclude "swapfile" --exclude "lost+found" --exclude ".cache" --exclude "Downloads" / /mnt/backup
+
+# Install proprietary NVIDIA driver
+# https://howto.lintel.in/install-nvidia-arch-linux/
+
+# GRUB freezing when any USB plugged in
+# - Could switch to another bootloader
+
+# Switch to integrated intel graphics?
+#
+
+# Failed to load kernel modules after kernel update
+# https://www.reddit.com/r/archlinux/comments/7oxpvd/arch_linux_fails_to_load_kernel_modules_after/
+
+# Audio pin changes do not persist
+# 
+
+# Keyboard auto-configure
+#
+
+# Clean dotfiles
