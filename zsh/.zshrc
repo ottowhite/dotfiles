@@ -42,6 +42,7 @@ alias dp="cd '$y2p' && $EDITOR"
 alias sn="iwctl station wlan0 scan"
 alias gn="iwctl station wlan0 get-networks"
 alias cn="iwctl station wlan0 connect "
+alias loc="readlink -f"
 
 alias gittags="echo \
 \"build:    Build related changes (eg: npm related/ adding external dependencies)
