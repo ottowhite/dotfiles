@@ -4,7 +4,7 @@ set $mod Mod4
 new_window 1pixel
 smart_borders on
 
-gaps inner 10
+gaps inner 20
 gaps outer 0
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
@@ -27,13 +27,13 @@ bindsym $mod+q       kill
 bindsym $mod+d       exec --no-startup-id dmenu_run -l 5
 bindsym $mod+e       exec --no-startup-id /home/otto/.config/i3/evalClip.sh
 bindsym $mod+b       exec --no-startup-id brave
-bindsym $mod+n       exec --no-startup-id notion-app-nativefier
+bindsym $mod+n       exec --no-startup-id notion-app
 bindsym $mod+t       exec --no-startup-id thunderbird
 bindsym $mod+i       exec --no-startup-id idea
 bindsym $mod+x       exec --no-startup-id GDK_SCALE=2 xournalpp
 bindsym $mod+s       exec --no-startup-id spotify --force-device-scale-factor=2 # alacritty -e /home/otto/.config/i3/pickMusic.sh && exit
 bindsym $mod+a       exec anki
-bindsym $mod+c       exec --no-startup-id libreoffice ~/Documents/Journal.docx
+bindsym $mod+Shift+c exec --no-startup-id libreoffice ~/Documents/Journal.docx
 
 bindsym $mod+Shift+s      exec --no-startup-id maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
 bindsym $mod+Shift+b      exec alacritty -e sudo /home/otto/.config/i3/fixSound.sh && exit
@@ -131,14 +131,14 @@ bindsym $mod+0 workspace number $ws10
 
 # Assigns odd numbers to my connected monitor and even to laptop monitor
 workspace $ws1 output HDMI-0 eDP-1-1
-workspace $ws2 output HDMI-0 eDP-1-1
 workspace $ws3 output HDMI-0 eDP-1-1
-workspace $ws4 output HDMI-0 eDP-1-1
 workspace $ws5 output HDMI-0 eDP-1-1
-workspace $ws6 output eDP-1-1 
-workspace $ws7 output eDP-1-1
+workspace $ws7 output HDMI-0 eDP-1-1
+workspace $ws9 output HDMI-0 eDP-1-1
+workspace $ws2 output eDP-1-1 
+workspace $ws4 output eDP-1-1
+workspace $ws6 output eDP-1-1
 workspace $ws8 output eDP-1-1
-workspace $ws9 output eDP-1-1
 workspace $ws10 output eDP-1-1
 
 # move focused container to workspace
@@ -153,7 +153,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-bindsym $mod+Shift+c reload # reload the configuration file
+# bindsym $mod+Shift+c reload # reload the configuration file
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
