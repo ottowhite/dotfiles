@@ -5,22 +5,18 @@ Plug 'doums/darcula'
 Plug 'dracula/vim'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
-Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
 Plug 'craigemery/vim-autotag'
-Plug 'vim-syntastic/syntastic'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'KabbAmine/vCoolor.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rust-lang/rust.vim'
+Plug 'm-pilia/vim-ccls'
 call plug#end()
 
 " Appearance
-set encoding=utf-8
 let ayucolor="dark"
 colorscheme space-vim-dark
 let g:airline_powerline_fonts = 1
@@ -41,12 +37,6 @@ let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
 " Tabbing and functionality
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab 
-set smartindent
-set smartcase 
 set incsearch
 " keeps going up a directory until it finds a tag file
 set tags=tags;/ 
@@ -58,15 +48,19 @@ set noswapfile
 set nobackup
 set diffopt+=vertical
 
+" set list
+" set listchars=tab:>-
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+set expandtab
+
 " Maps
 
 let mapleader = " "
 
 " imap ii	<Esc>
 imap <C-c>	 <Esc>
-map	 <C-l>   :noh <CR>
-
-map  <C-n> :NERDTreeToggle<CR>
 map  <C-f> :Files<CR>
 map  <C-d> :Rg<CR>
 
@@ -81,7 +75,11 @@ nmap	   <Leader>gl :diffget //3<CR>
 " CSCOPE
 " nmap <C-p>  viw"fy:cs find c <C-r>f<CR>
 " nmap <C-}> 
-" nmap <C-p> <Plug>(coc-references) Need to set up LSP for this
+nmap <C-p> <Plug>(coc-references)
+nmap <C-l> <Plug>(coc-definition)
+nmap <Leader>c <Plug>(coc-codeaction-cursor)
+
+" nmap <C-p>  viw"fy:cs find c <C-r>f<CR>
 
 " Plugin specific config
 let g:ycm_show_diagnostics_ui = 0
@@ -191,3 +189,10 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 
 vmap <C-c> :w !xclip -i -sel c<CR><CR>
+
+let g:rustfmt_autosave = 1
+" Annoying workaround that stops shiftwidth=4 being forced by rust extension
+" augroup TogglePreview
+"   autocmd!
+"   autocmd Filetype,BufEnter * execute 'set shiftwidth=2'
+" augroup END
