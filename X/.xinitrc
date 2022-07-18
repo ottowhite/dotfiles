@@ -39,6 +39,7 @@ fi
 # exec xterm -geometry 80x66+0+0 -name login
 # ~/.config/i3/2in1screen &
 # xrandr --auto &
+# autorandr --change &
 xrandr --setprovideroutputsource modesetting NVIDIA-G0 &
 autorandr --change &
 exec i3
