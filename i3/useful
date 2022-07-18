@@ -1,6 +1,8 @@
 # my script for backing up everything from CTT video:
 # https://www.youtube.com/watch?v=OEfboN-Nb2s
-sudo rsync -aAX --info=progress2 --delete --dry-run --exclude "/dev/*" --exclude "/proc/*" --exclude "/sys/*" --exclude "/tmp/*" --exclude "/run/*" --exclude "/mnt/*" --exclude "/media/*" --exclude "swapfile" --exclude "lost+found" --exclude ".cache" --exclude "Downloads" / /mnt/backup
+sudo rsync -aAXvv --info=progress2 --delete --dry-run --exclude "/dev/*" --exclude "/proc/*" --exclude "/sys/*" --exclude "/tmp/*" --exclude "/run/*" --exclude "/mnt/*" --exclude "/media/*" --exclude "swapfile" --exclude "lost+found" --exclude ".cache" --exclude "Downloads" / /mnt/backup
+
+sudo rsync -aAXvv --info=progress2 --delete --dry-run --exclude ".cache" --exclude "Downloads" /home/otto/ /mnt/backup
 
 # Install proprietary NVIDIA driver
 # https://howto.lintel.in/install-nvidia-arch-linux/

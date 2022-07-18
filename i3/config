@@ -4,19 +4,20 @@ set $mod Mod4
 new_window 1pixel
 smart_borders on
 
-gaps inner 20
+gaps inner 0
 gaps outer 0
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# xss-lock grabs a logind suspend in lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id compton -f
+exec --no-startup-id bluetoothctl power on
+exec --no-startup-id nm-applet
 
 exec_always --no-startup-id feh --bg-scale /home/otto/Pictures/wallpapers/northern_lights_blue.jpg
 exec_always --no-startup-id setxkbmap -option ctrl:swapcaps -option altwin:swap_alt_win
-exec_always --no-startup-id /home/otto/.config/polybar/reloadPolybar.sh
+# exec_always --no-startup-id /home/otto/.config/polybar/reloadPolybar.sh
 exec_always --no-startup-id /home/otto/.config/i3/mapTouchInputToInternalDisplay.sh
-
 bindsym $mod+w layout toggle
 
 bindsym $mod+r mode "resize"
@@ -27,13 +28,15 @@ bindsym $mod+q       kill
 bindsym $mod+d       exec --no-startup-id dmenu_run -l 5
 bindsym $mod+e       exec --no-startup-id /home/otto/.config/i3/evalClip.sh
 bindsym $mod+b       exec --no-startup-id brave
-bindsym $mod+n       exec --no-startup-id notion-app
+bindsym $mod+n       exec --no-startup-id notion-app-enhanced
 bindsym $mod+t       exec --no-startup-id thunderbird
-bindsym $mod+i       exec --no-startup-id idea
+bindsym $mod+i       exec --no-startup-id GDK_SCALE=2 idea
 bindsym $mod+x       exec --no-startup-id GDK_SCALE=2 xournalpp
-bindsym $mod+s       exec --no-startup-id spotify --force-device-scale-factor=2 # alacritty -e /home/otto/.config/i3/pickMusic.sh && exit
+bindsym $mod+s       exec --no-startup-id /home/otto/.config/i3/pickMusic.sh
 bindsym $mod+a       exec anki
 bindsym $mod+Shift+c exec --no-startup-id libreoffice ~/Documents/Journal.docx
+bindsym $mod+Shift+d exec --no-startup-id libreoffice /home/otto/Documents/Dream\ journal\ \(new\).docx
+bindsym $mod+Shift+t exec brave --new-window https://www.notion.so/Track-daily-data-e69ec6f9181b459da9d9e75a5e0c0ea9 & brave --new-window "https://docs.google.com/spreadsheets/d/1m2eXW-Ewh5SYm97snEzT7GbQYBzSY9YzoS2bPArdaD4/edit#gid=0"
 
 bindsym $mod+Shift+s      exec --no-startup-id maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
 bindsym $mod+Shift+b      exec alacritty -e sudo /home/otto/.config/i3/fixSound.sh && exit
@@ -56,34 +59,35 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next       ; exec --no-star
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous   ; exec --no-startup-id notify-send -t 1000 "Previous" ""
 
 font pango:Noto Mono for Powerline, Font Awesome 8
-# bar {
-#         position top
-#         font pango:Noto Mono for Powerline, Font Awesome 11
-#         status_command bumblebee-status \
-#             -m nic memory nvidiagpu cpu pasink pasource battery time \
-#             -p time.format="%d/%m/%y (%a) %H:%M:%S" \
-#                nvidiagpu.format='{temp}°C {mem_used}/{mem_total} MiB' \
-#                memory.format='{used} ({percent:05.02f}%)' \
-#                nic.format='{ssid}' \
-#                .format='' \
-#             -t iceberg-powerline
-#         colors {
-# 
-# 		            # Gruvbox
-#                 #                  border  bg      text
-#                 # focused_workspace  #705F51 #705F51 #EBDBB2
-#                 # active_workspace   #1C2121 #222233 #EBDBB2
-#                 # inactive_workspace #1C2121 #1C2121 #EBDBB2
-#                 # background #1C2121 
-# 
-# 		            # Mild blue-ish theme
-#                 focused_workspace  #555577 #555577 #FFFFFF
-#                 active_workspace   #333344 #222233 #FFFFFF
-#                 inactive_workspace #333344 #333344 #FFFFFF
-#                 background #333344
-#         }
-# 
-# }
+bar {
+        mode hide
+        position top
+        font pango:Noto Mono for Powerline, Font Awesome 11
+        status_command bumblebee-status \
+            -m nic memory nvidiagpu cpu pasink pasource battery time \
+            -p time.format="%d/%m/%y (%a) %H:%M:%S" \
+               nvidiagpu.format='{temp}°C {mem_used}/{mem_total} MiB' \
+               memory.format='{used} ({percent:05.02f}%)' \
+               nic.format='{ssid}' \
+               .format='' \
+            -t iceberg-powerline
+        colors {
+
+		            # Gruvbox
+                #                  border  bg      text
+                # focused_workspace  #705F51 #705F51 #EBDBB2
+                # active_workspace   #1C2121 #222233 #EBDBB2
+                # inactive_workspace #1C2121 #1C2121 #EBDBB2
+                # background #1C2121 
+
+		            # Mild blue-ish theme
+                focused_workspace  #555577 #555577 #FFFFFF
+                active_workspace   #333344 #222233 #FFFFFF
+                inactive_workspace #333344 #333344 #FFFFFF
+                background #333344
+        }
+
+}
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -140,6 +144,18 @@ workspace $ws4 output eDP-1-1
 workspace $ws6 output eDP-1-1
 workspace $ws8 output eDP-1-1
 workspace $ws10 output eDP-1-1
+
+# Charlie's house
+# workspace $ws1 output DP-2 eDP-1-1
+# workspace $ws3 output DP-2 eDP-1-1
+# workspace $ws5 output DP-2 eDP-1-1
+# workspace $ws7 output DP-2 eDP-1-1
+# workspace $ws9 output DP-2 eDP-1-1
+# workspace $ws2 output eDP-1-1 
+# workspace $ws4 output eDP-1-1
+# workspace $ws6 output eDP-1-1
+# workspace $ws8 output eDP-1-1
+# workspace $ws10 output eDP-1-1
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1

@@ -1,19 +1,12 @@
 #!/bin/sh
+choices="Spotify\nSoundcloud\nYoutube\nSWU\nR6M"
 
-echo 1\) Spotify
-echo 2\) Other
+chosen=`echo -e "$choices" | dmenu -i`
 
-read programNumber
-
-if [ "$programNumber" == "1" ]
-then
-  exec spotify & disown
-elif [ $programNumber == "2" ]
-then
-  exec brave
-elif [ $programNumber == "3" ]
-then
-  exec brave
-else
-  exec brave
-fi
+case "$chosen" in
+  Spotify) spotify --force-device-scale-factor=2 ;;
+  Soundcloud) brave --new-window www.soundcloud.com ;;
+  Youtube) brave --new-window www.youtube.com ;;
+  SWU) brave --new-window http://www.swu.fm/player/ ;;
+  R6M) brave --new-window https://www.bbc.co.uk/sounds/play/live:bbc_6music ;;
+esac
