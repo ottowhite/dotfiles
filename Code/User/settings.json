@@ -1,0 +1,10 @@
+{
+  "security.workspace.trust.untrustedFiles": "open",
+  "vim.leader": " ",
+  "keyboard.dipatch": "keyCode",
+  "editor.minimap.enabled": false,
+  "terminal.integrated.scrollback": 10000,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.lineNumbers": "relative"
+}
