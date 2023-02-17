@@ -4,7 +4,54 @@
   "keyboard.dipatch": "keyCode",
   "editor.minimap.enabled": false,
   "terminal.integrated.scrollback": 10000,
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "editor.lineNumbers": "relative"
+  "editor.lineNumbers": "relative",
+  "workbench.colorTheme": "Atom One Darker",
+  "editor.insertSpaces": false,
+  "haskell.manageHLS": "GHCup",
+  "editor.largeFileOptimizations": false,
+  "workbench.statusBar.visible": false,
+
+  // Line length ruler
+  "editor.rulers": [100],
+
+  // Remove the breadcrumb line 
+  "breadcrumbs.enabled": false,
+
+  // Remove the dots at the end of filenames for edited files
+  "explorer.decorations.badges": false,
+
+  // Remove the markings on the tabs for edited files
+  "workbench.editor.showIcons": false,
+  "workbench.editor.labelFormat": "default",
+  "workbench.editor.tabCloseButton": "off",
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.decorations.badges": false,
+
+  // Remove scrollbar
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.overviewRulerBorder": false,
+
+  // Remove scrollbar coloured indicators
+  "workbench.colorCustomizations": {
+    "editor[Warning|Error].forground": "#000000",
+    "editorOverviewRuler.addedForeground": "#0000",
+    "editorOverviewRuler.bracketMatchForeground": "#0000",
+    "editorOverviewRuler.deletedForeground": "#0000",
+    "editorOverviewRuler.errorForeground": "#0000",
+    "editorOverviewRuler.findMatchForeground": "#0000",
+    "editorOverviewRuler.infoForeground": "#0000",
+    "editorOverviewRuler.modifiedForeground": "#0000",
+    "editorOverviewRuler.rangeHighlightForeground": "#0000",
+    "editorOverviewRuler.selectionHighlightForeground": "#0000",
+    "editorOverviewRuler.warningForeground": "#0000",
+    "editorOverviewRuler.wordHighlightForeground": "#0000",
+    "editorOverviewRuler.wordHighlightStrongForeground": "#0000",
+  },
+  "extensions.autoUpdate": false,
+  "editor.inlineSuggest.enabled": true,
+  "window.menuBarVisibility": "toggle",
+"cmake.configureOnOpen": false,
+"workbench.activityBar.visible": false,
 }
