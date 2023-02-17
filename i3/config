@@ -1,7 +1,8 @@
 set $mod Mod4
 
 # Initial config
-new_window 1pixel
+new_window pixel 1
+for_window [class="^.*"] border pixel 4
 smart_borders on
 
 gaps inner 0
@@ -10,12 +11,13 @@ gaps outer 0
 # xss-lock grabs a logind suspend in lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id compton -f
+exec --no-startup-id picom
 exec --no-startup-id bluetoothctl power on
 exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 
-exec_always --no-startup-id feh --bg-scale /home/otto/Pictures/wallpapers/northern_lights_blue.jpg
-exec_always --no-startup-id setxkbmap -option ctrl:swapcaps -option altwin:swap_alt_win
+exec_always --no-startup-id feh --bg-scale /home/otto/Pictures/wallpapers/fuji.jpg
+exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl -option ctrl:swapcaps -option altwin:swap_lalt_lwin
 # exec_always --no-startup-id /home/otto/.config/polybar/reloadPolybar.sh
 exec_always --no-startup-id /home/otto/.config/i3/mapTouchInputToInternalDisplay.sh
 bindsym $mod+w layout toggle
@@ -27,28 +29,26 @@ bindsym $mod+Return  exec --no-startup-id alacritty
 bindsym $mod+q       kill
 bindsym $mod+d       exec --no-startup-id dmenu_run -l 5
 bindsym $mod+e       exec --no-startup-id /home/otto/.config/i3/evalClip.sh
+bindsym $mod+a       exec --no-startup-id brave --new-window --app="https://chat.openai.com/chat"
+bindsym $mod+i       exec --no-startup-id brave --new-window --app="https://icloud.com/notes"
 bindsym $mod+b       exec --no-startup-id brave
 bindsym $mod+n       exec --no-startup-id notion-app-enhanced
-bindsym $mod+t       exec --no-startup-id thunderbird
-bindsym $mod+i       exec --no-startup-id GDK_SCALE=2 idea
-bindsym $mod+x       exec --no-startup-id GDK_SCALE=2 xournalpp
+bindsym $mod+t       exec --no-startup-id brave --new-window --app="https://outlook.office.com/mail/" & brave --new-window --app="https://mail.google.com/mail/u/0/#inbox"
 bindsym $mod+s       exec --no-startup-id /home/otto/.config/i3/pickMusic.sh
-bindsym $mod+a       exec anki
+
+bindsym $mod+Shift+s exec --no-startup-id maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
+bindsym $mod+Shift+b exec --no-startup-id alacritty -e sudo /home/otto/.config/i3/fixSound.sh && exit
+bindsym $mod+Shift+p exec --no-startup-id i3lock -c 000000
+bindsym $mod+Shift+n exec --no-startup-id brave --new-window --app="https://calendar.google.com/calendar/u/0/r?pli=1"
 bindsym $mod+Shift+c exec --no-startup-id libreoffice ~/Documents/Journal.docx
 bindsym $mod+Shift+d exec --no-startup-id libreoffice /home/otto/Documents/Dream\ journal\ \(new\).docx
-bindsym $mod+Shift+t exec brave --new-window https://www.notion.so/Track-daily-data-e69ec6f9181b459da9d9e75a5e0c0ea9 & brave --new-window "https://docs.google.com/spreadsheets/d/1m2eXW-Ewh5SYm97snEzT7GbQYBzSY9YzoS2bPArdaD4/edit#gid=0"
+bindsym $mod+Shift+w exec --no-startup-id brave --new-window --app="https://web.whatsapp.com" & brave --new-window --app="https://messages.google.com/web/conversations" 
 
-bindsym $mod+Shift+s      exec --no-startup-id maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
-bindsym $mod+Shift+b      exec alacritty -e sudo /home/otto/.config/i3/fixSound.sh && exit
 bindsym $mod+Shift+Ctrl+s exec --no-startup-id maim -s --format jpg ~/Pictures/screenshots/screenshot_`date '+%d-%m-%y_%H:%M:%S'`.jpg
-# bindsym $mod+m            exec --no-startup-id autorandr --change # No longer necessary
-# bindsym $mod+BackSpace    exec /home/otto/.config/i3/rotate.sh
-bindsym $mod+Shift+p      exec systemctl suspend ; exec betterlockscreen -l 
-# bindsym $mod+c            exec /home/otto/.config/i3/profileSwitcher.sh
-# bindsym $mod+Shift+i      exec /home/otto/.config/i3/activateTethering.sh
+bindsym $mod+Ctrl+Shift+d exec --no-startup-id /home/otto/Applications/Discord/Discord
 
-bindsym XF86MonBrightnessUp   exec /home/otto/.config/i3/brightnessChanger.sh 0.1
-bindsym XF86MonBrightnessDown exec /home/otto/.config/i3/brightnessChanger.sh -0.1
+bindsym XF86MonBrightnessUp   exec /home/otto/.config/i3/brightnessChanger.sh 1
+bindsym XF86MonBrightnessDown exec /home/otto/.config/i3/brightnessChanger.sh -1
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   +5% 
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@   -5% 
@@ -70,7 +70,7 @@ bar {
                memory.format='{used} ({percent:05.02f}%)' \
                nic.format='{ssid}' \
                .format='' \
-            -t iceberg-powerline
+            -t nord-powerline
         colors {
 
 		            # Gruvbox
@@ -134,28 +134,16 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 # Assigns odd numbers to my connected monitor and even to laptop monitor
-workspace $ws1 output HDMI-0 eDP-1-1
-workspace $ws3 output HDMI-0 eDP-1-1
-workspace $ws5 output HDMI-0 eDP-1-1
-workspace $ws7 output HDMI-0 eDP-1-1
-workspace $ws9 output HDMI-0 eDP-1-1
+workspace $ws1 output HDMI-0 DP-2 eDP-1-1
+workspace $ws3 output HDMI-0 DP-2 eDP-1-1
+workspace $ws5 output HDMI-0 DP-2 eDP-1-1
+workspace $ws7 output HDMI-0 DP-2 eDP-1-1
+workspace $ws9 output HDMI-0 DP-2 eDP-1-1
 workspace $ws2 output eDP-1-1 
 workspace $ws4 output eDP-1-1
 workspace $ws6 output eDP-1-1
 workspace $ws8 output eDP-1-1
 workspace $ws10 output eDP-1-1
-
-# Charlie's house
-# workspace $ws1 output DP-2 eDP-1-1
-# workspace $ws3 output DP-2 eDP-1-1
-# workspace $ws5 output DP-2 eDP-1-1
-# workspace $ws7 output DP-2 eDP-1-1
-# workspace $ws9 output DP-2 eDP-1-1
-# workspace $ws2 output eDP-1-1 
-# workspace $ws4 output eDP-1-1
-# workspace $ws6 output eDP-1-1
-# workspace $ws8 output eDP-1-1
-# workspace $ws10 output eDP-1-1
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
