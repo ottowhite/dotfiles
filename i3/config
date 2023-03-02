@@ -37,7 +37,7 @@ bindsym $mod+t       exec --no-startup-id brave --new-window --app="https://outl
 bindsym $mod+s       exec --no-startup-id /home/otto/.config/i3/pickMusic.sh
 
 bindsym $mod+Shift+s exec --no-startup-id maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
-bindsym $mod+Shift+b exec --no-startup-id alacritty -e sudo /home/otto/.config/i3/fixSound.sh && exit
+bindsym $mod+Shift+b exec --no-startup-id /home/otto/.config/i3/bluetoothController.sh
 bindsym $mod+Shift+p exec --no-startup-id i3lock -c 000000
 bindsym $mod+Shift+n exec --no-startup-id brave --new-window --app="https://calendar.google.com/calendar/u/0/r?pli=1"
 bindsym $mod+Shift+c exec --no-startup-id libreoffice ~/Documents/Journal.docx
