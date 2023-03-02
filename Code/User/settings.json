@@ -5,34 +5,30 @@
   "editor.minimap.enabled": false,
   "terminal.integrated.scrollback": 10000,
   "editor.lineNumbers": "relative",
-  "workbench.colorTheme": "Atom One Darker",
+  "workbench.colorTheme": "GitHub Dark",
   "editor.insertSpaces": false,
   "haskell.manageHLS": "GHCup",
   "editor.largeFileOptimizations": false,
   "workbench.statusBar.visible": false,
-
   // Line length ruler
-  "editor.rulers": [100],
-
+  "editor.rulers": [
+    100
+  ],
   // Remove the breadcrumb line 
   "breadcrumbs.enabled": false,
-
   // Remove the dots at the end of filenames for edited files
   "explorer.decorations.badges": false,
-
   // Remove the markings on the tabs for edited files
   "workbench.editor.showIcons": false,
   "workbench.editor.labelFormat": "default",
   "workbench.editor.tabCloseButton": "off",
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.decorations.badges": false,
-
   // Remove scrollbar
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.hideCursorInOverviewRuler": true,
   "editor.overviewRulerBorder": false,
-
   // Remove scrollbar coloured indicators
   "workbench.colorCustomizations": {
     "editor[Warning|Error].forground": "#000000",
@@ -52,6 +48,10 @@
   "extensions.autoUpdate": false,
   "editor.inlineSuggest.enabled": true,
   "window.menuBarVisibility": "toggle",
-"cmake.configureOnOpen": false,
-"workbench.activityBar.visible": false,
+  "cmake.configureOnOpen": false,
+  "workbench.activityBar.visible": false,
+  "editor.formatOnSave": true,
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
 }
